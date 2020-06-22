@@ -7,9 +7,8 @@ require("dotenv").config();
 class MainClass {
     static mainMethod() {
         setInterval(() => {
-            
             try {
-                const curentConfig = config.filter((item) => {
+                const curentConfig = config.filter(item => {
                     if (item.ticker) return item;
                 });
                 curentConfig.forEach((item) => {

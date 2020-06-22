@@ -120,6 +120,4 @@ class ApiCallHandler {
     }
 }
 
-// let ApiCallHandler = new ApiCallHandler()
-// let ApiCallHandler1 = new ApiCallHandler()
 module.exports = ApiCallHandler;

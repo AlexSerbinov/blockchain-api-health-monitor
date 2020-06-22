@@ -10,9 +10,7 @@ const maxStringLength = process.env.TELEGRAM_MAX_STRING_LENGTH;
 
 class TelegramReporter {
     constructor() {
-        if (process.env.TELEGRAM_BOT_ENABLE == "true") {
-            TelegramReporter.checkActivation();
-        }
+        if (process.env.TELEGRAM_BOT_ENABLE) TelegramReporter.checkActivation();
     }
 
     static checkActivation() {
@@ -27,7 +25,7 @@ class TelegramReporter {
                 }
             });
         } catch (e) {
-            return reject(e);
+            return e;
         }
     }
 
@@ -47,18 +45,14 @@ class TelegramReporter {
                 );
             });
         } catch (e) {
-            return reject(e);
+            return e;
         }
     }
 
     static async parseMessage(data) {
         try {
-            if (typeof data === "string") {
-                data = await TelegramReporter.parseString(data);
-            }
-            if (typeof data === "object") {
-                data = await TelegramReporter.parseObject(data);
-            }
+            if (typeof data === "string") data = await TelegramReporter.parseString(data);
+            else if (typeof data === "object") data = await TelegramReporter.parseObject(data);
             return data;
         } catch (e) {
             return e;
@@ -113,7 +107,7 @@ class TelegramReporter {
 
     static async readDataFromFile() {
         return new Promise(async (resolve, reject) => {
-            await fs.readFile(chatIdFilePath, (err, data) => {
+            fs.readFile(chatIdFilePath, (err, data) => {
                 return resolve(data.toString());
             });
         });
