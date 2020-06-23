@@ -5,12 +5,12 @@ class ApiResultHandler {
     static sendCurrency(values) {
         try {
             const { ticker, server, port, res } = values;
-            console.log(`=-=--=-=-=-=-=-=-=- sendCurrency -=-=-=-=-=-=-=-=-`);
+            // console.log(`=-=--=-=-=-=-=-=-=- sendCurrency -=-=-=-=-=-=-=-=-`);
             if (res.result === true && res.txHash) {
-                console.log("Test passed:)");
+                // console.log("Test passed:)");
                 return true;
             } else if (res.result === false && res.message) {
-                console.log(`test failed:(`);
+                // console.log(`test failed:(`);
                 return res.message;
             }
         } catch (error) {
@@ -21,12 +21,12 @@ class ApiResultHandler {
     static getAdminBalance(values) {
         try {
             const { ticker, server, port, res } = values;
-            console.log(`=-=--=-=-=-=-=-=-=- getAdminBalance -=-=-=-=-=-=-=-=`);
+            // console.log(`=-=--=-=-=-=-=-=-=- getAdminBalance -=-=-=-=-=-=-=-=`);
             if (res.result === true && res.balance) {
-                console.log("Test passed");
+                // console.log("Test passed");
                 return true;
             } else {
-                console.log(`test failed`);
+                // console.log(`test failed`);
                 return false;
             }
         } catch (error) {
@@ -37,14 +37,12 @@ class ApiResultHandler {
     static validateAddress(values) {
         try {
             const { ticker, server, port, res } = values;
-            console.log(
-                `=-=--=-=-=-=-=-=-=- validateAddress -=-=-=-=-=-=-=-=-`
-            );
+            // console.log(`=-=--=-=-=-=-=-=-=- validateAddress -=-=-=-=-=-=-=-=-`);
             if (res.result === true && res.balance) {
-                console.log("Test passed");
+                // console.log("Test passed");
                 return true;
             } else {
-                console.log(`test failed`);
+                // console.log(`test failed`);
                 return false;
             }
         } catch (error) {
@@ -55,12 +53,12 @@ class ApiResultHandler {
     static getBlockNumber(values) {
         try {
             const { ticker, server, port, res } = values;
-            console.log(`=-=--=-=-=-=-=-=-=- getBlockNumber -=-=-=-=-=-=-=-=-`);
+            // console.log(`=-=--=-=-=-=-=-=-=- getBlockNumber -=-=-=-=-=-=-=-=-`);
             if (res.result === true && res.number) {
-                console.log("Test passed");
+                // console.log("Test passed");
                 return true;
             } else {
-                console.log(`test failed`);
+                // console.log(`test failed`);
                 return false;
             }
         } catch (error) {

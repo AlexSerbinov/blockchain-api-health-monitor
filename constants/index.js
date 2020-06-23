@@ -1,7 +1,8 @@
 // REST
-module.exports.GET = 'get'
-module.exports.POST = 'post'
-module.exports.DELETE = 'delete'
+module.exports.GET = 'GET'
+module.exports.POST = 'POST'
+module.exports.PUT = 'PUT'
+module.exports.DELETE = 'DELETE'
 // METHODS
 module.exports.GET_ADMIN_BALANCE = 'getAdminBalance';
 module.exports.VALIDATE_ADDRES = 'validateAddress';

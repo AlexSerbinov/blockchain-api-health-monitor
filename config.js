@@ -39,8 +39,8 @@ module.exports.config = [
         port: DefaultPort,
         getMethodsInterval: defaultGetInterval,
         methods: {
-            getAdminBalance: true,
-            getBlockNumber: true,
+            // getAdminBalance: true,
+            // getBlockNumber: true,
             validateAddress: {
                 address:
                     "GAI3GJ2Q3B35AOZJ36C4ANE3HSS4NK7WI6DNO4ZSHRAX6NG7BMX6VJER",

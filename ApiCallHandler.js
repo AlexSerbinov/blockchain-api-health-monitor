@@ -1,7 +1,7 @@
 require("dotenv").config();
 const fetch = require("node-fetch");
 const { AUTH_TOKEN } = process.env;
-const { GET, POST, DELETE } = require("./constants");
+const { GET, POST, PUT, DELETE } = require("./constants");
 
 class ApiCallHandler {
     static async sendCurrency(values) {
@@ -81,10 +81,7 @@ class ApiCallHandler {
         return new Promise(async (resolve, reject) => {
             try {
                 let formBody;
-                if (
-                    method.toLocaleUpperCase() === "POST" ||
-                    method.toLocaleUpperCase() === "PUT"
-                ) {
+                if (method === POST || method === PUT) {
                     formBody = [];
                     for (var property in params) {
                         var encodedKey = encodeURIComponent(property);
@@ -101,18 +98,19 @@ class ApiCallHandler {
                     },
                     body: formBody,
                 }).then((res) => {
-                    let bufferBody =
-                        res.body._readableState.buffer.head.data;
-                    let fromBuffer = bufferBody.toString("utf8");
-                    let result;
-                    try {
-                        JSON.parse(fromBuffer);
-                        result = JSON.parse(fromBuffer);
-                    } catch {
-                        result = false;
-                    }
-                    return resolve(result);
-                }).catch((e) => console.log(e));
+                        let bufferBody =
+                            res.body._readableState.buffer.head.data;
+                        let fromBuffer = bufferBody.toString("utf8");
+                        let result;
+                        try {
+                            JSON.parse(fromBuffer);
+                            result = JSON.parse(fromBuffer);
+                        } catch {
+                            result = false;
+                        }
+                        return resolve(result);
+                    })
+                    .catch((e) => e);
             } catch (e) {
                 return reject(e);
             }
