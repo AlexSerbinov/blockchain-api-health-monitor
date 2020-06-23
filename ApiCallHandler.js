@@ -110,7 +110,10 @@ class ApiCallHandler {
                         }
                         return resolve(result);
                     })
-                    .catch((e) => e);
+                    .catch((e) => { 
+                        let result = false
+                        resolve (result)
+                    });
             } catch (e) {
                 return reject(e);
             }

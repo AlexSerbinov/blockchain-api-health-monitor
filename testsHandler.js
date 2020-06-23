@@ -1,5 +1,5 @@
 const { config } = require("./config.js");
-const TelegramReportService = require("./TelegramReporter");
+const TelegramReportService = require("./telegramReporter");
 
 class ApiResultHandler {
     static sendCurrency(values) {

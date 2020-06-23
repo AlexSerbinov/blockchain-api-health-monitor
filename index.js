@@ -1,20 +1,19 @@
 const ApiCallHandler = require("./ApiCallHandler");
-const TelegramReportService = require("./TelegramReporter");
+const TelegramReportService = require("./telegramReporter");
 TelegramReportService.checkActivation()
-
-const TestsHandler = require("./testshandler");
+const TestsHandler = require("./testsHandler");
 const { config } = require("./config.js");
 require("dotenv").config();
-TelegramReportService.sendMessage('sdfadf');
 class MainClass {
     static mainMethod() {
-        setInterval(() => {
+        // setInterval(() => {
             try {
                 const curentConfig = config.filter(item => {
                     if (item.ticker) return item;
                 });
                 curentConfig.forEach((item) => {
                     for (const method in item.methods) {
+                        // console.log(item.methods[method])
                         const params = {
                             ticker: item.ticker,
                             server: item.server,
@@ -34,7 +33,7 @@ class MainClass {
                                 res.result === false &&
                                 res.message &&
                                 process.env.TELEGRAM_BOT_ENABLE === "true"
-                                ) {
+                            ) {
                                 telegramMessage.working = res.result;
                                 telegramMessage["message"] = res.message;
                                 TelegramReportService.sendMessage(
@@ -42,9 +41,10 @@ class MainClass {
                                 );
                             }
                             if (
-                                res.result !== true &&
+                                result === false &&
                                 process.env.TELEGRAM_BOT_ENABLE === "true"
                             ) {
+                                telegramMessage.working = false
                                 telegramMessage["message"] =
                                     "cannot conect with this currency in the server";
                                 TelegramReportService.sendMessage(
@@ -59,7 +59,7 @@ class MainClass {
             } catch (error) {
                 console.log(error);
             }
-        }, 3000);
+        // }, 5000);
     }
 
     // static async handleTestReults(values) {
