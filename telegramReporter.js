@@ -28,7 +28,6 @@ class TelegramReporter {
 
     static async sendMessage(data) {
         try {
-            console.log(`send mess working!`)
             const text = await TelegramReporter.parseMessage(data);
             const chatId = await TelegramReporter.readDataFromFile();
             if (!chatId)
@@ -108,7 +107,7 @@ class TelegramReporter {
 
     static messageParser(item) {
         try {
-            console.log(item)
+            // console.log(item)
             let telegramMessage = {
                 ticker: item.ticker,
                 port: item.port,

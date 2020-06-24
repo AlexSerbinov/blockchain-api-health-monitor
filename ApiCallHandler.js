@@ -28,7 +28,7 @@ class ApiCallHandler {
             });
             // console.log(params)
             setInterval(async () => {
-                console.log(`setInterva working ${ticker} ${params.sendCurrencyInteval}`)
+                // console.log(`setInterva working ${ticker} ${params.sendCurrencyInteval}`)
                 let result = await ApiCallHandler.fetchUrl(url, POST, params);
                 const testResult = TestsHandler[method](result);
                 let res = testResult
