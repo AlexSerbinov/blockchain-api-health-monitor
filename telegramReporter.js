@@ -28,6 +28,7 @@ class TelegramReporter {
 
     static async sendMessage(data) {
         try {
+            console.log(`send mess working!`)
             const text = await TelegramReporter.parseMessage(data);
             const chatId = await TelegramReporter.readDataFromFile();
             if (!chatId)
@@ -103,6 +104,40 @@ class TelegramReporter {
         return fs.readFileSync(chatIdFilePath, (err) => { 
             if (err) return err;
         }).toString()
+    }
+
+    static messageParser(item) {
+        try {
+            console.log(item)
+            let telegramMessage = {
+                ticker: item.ticker,
+                port: item.port,
+                method: item.method,
+                res: item.res,
+            };
+            if (
+                telegramMessage.res.result === false &&
+                telegramMessage.res.message &&
+                process.env.TELEGRAM_BOT_ENABLE === "true"
+            ) {
+                telegramMessage['working']= telegramMessage.res.result;
+                telegramMessage['message'] = telegramMessage.res.message;
+                delete telegramMessage.res
+                TelegramReporter.sendMessage(telegramMessage);
+            }
+            if (
+                telegramMessage.res === false &&
+                process.env.TELEGRAM_BOT_ENABLE === "true"
+            ) {
+                telegramMessage.working = false;
+                telegramMessage["message"] =
+                    "cannot conect with this currency in the server";
+                    delete telegramMessage.res
+                    TelegramReporter.sendMessage(telegramMessage);
+            }
+        } catch (e) {
+            return e;
+        }
     }
 
 }
